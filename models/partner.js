@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
-const commentSchema = new Schema(
+const partnerSchema = new Schema(
     {
         name: {
             type: String,
@@ -9,7 +9,7 @@ const commentSchema = new Schema(
             unique: true
         },
         image: {
-            type: string,
+            type: String,
             required: true
         },
         featured: {

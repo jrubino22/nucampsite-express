@@ -112,11 +112,11 @@ favoriteRouter.route("/:campsiteId")
     res.end(`PUT operation not supported on /favorites/${req.params.campsiteId}`);
 })
 .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Favorite.findOne({user:req.user._id})//Find hte users fav doc.
+    Favorite.findOne({user:req.user._id})
     .then(favorite => {
-        const campsiteIndex = favorites.campsites.indexOf(req.params.campsiteId)//If campsiteId from the URL is present in users fav List
+        const campsiteIndex = favorites.campsites.indexOf(req.params.campsiteId)
         if(campsiteIndex >= 0) {
-            favorite.campsites.splice(campsiteIndex, 1) //Deletes the campsite from the list
+            favorite.campsites.splice(campsiteIndex, 1)
             favorite.save()
             .then((favorite) => {
                 console.log('Favorite Deleted', favorite);
@@ -127,7 +127,6 @@ favoriteRouter.route("/:campsiteId")
             .catch(err => next(err)); 
         
         } else {
-            //res.statusCode = 200;
             res.setHeader('Content-Type', 'text/plain');
             res.end('You do not have any favorites to delete.');
         }
